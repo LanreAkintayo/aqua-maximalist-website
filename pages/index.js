@@ -5,24 +5,51 @@ import Image from "next/image";
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
+import Faq from "react-faq-component";
+
+const data = {
+  title: "",
+  rows: [
+    {
+      title: "How many Aqua Clan is available for purchase?",
+      content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed tempor sem. Aenean vel turpis feugiat,
+            ultricies metus at, consequat velit. Curabitur est nibh, varius in tellus nec, mattis pulvinar metus.
+            In maximus cursus lorem, nec laoreet velit eleifend vel. Ut aliquet mauris tortor, sed egestas libero interdum vitae.
+            Fusce sed commodo purus, at tempus turpis.`,
+    },
+    {
+      title: "When will the collection drop?",
+      content:
+        "Nunc maximus, magna at ultricies elementum, risus turpis vulputate quam, vitae convallis ex tortor sed dolor.",
+    },
+    {
+      title: "How much will it cost?",
+      content: `Curabitur laoreet, mauris vel blandit fringilla, leo elit rhoncus nunc, ac sagittis leo elit vel lorem.
+          Fusce tempor lacus ut libero posuere viverra. Nunc velit dolor, tincidunt at varius vel, laoreet vel quam.
+          Sed dolor urna, lobortis in arcu auctor, tincidunt mattis ante. Vivamus venenatis ultricies nibh in volutpat.
+          Cras eu metus quis leo vestibulum feugiat nec sagittis lacus.Mauris vulputate arcu sed massa euismod dignissim. `,
+    },
+  ],
+};
+
+const styles = {
+  bgColor: "black",
+  titleTextColor: "white",
+  rowTitleColor: "white",
+  rowContentColor: "white",
+  arrowColor: "white",
+};
+
+const config = {
+  animate: true,
+  arrowIcon: "+",
+  // tabFocus: true
+};
 
 export default function Index() {
   return (
     <div className="bg-black px-3">
-      {/* <div className="relative w-full h-96 bg-gradient-to-tl from-yellow-900 to-green-700 mt-3">
-        <img
-          alt="..."
-          src="/img/fish.jpg"
-          className="object-cover absolute w-full h-full mix-blend-overlay"
-        />
-        <div>
-          <h1 className="text-white font-bold">This is the headline</h1>
-        </div>
-      </div> */}
-
       <section className="w-full h-screen">
-        {/*  */}
-
         <div className="relative w-full h-full">
           <div className="relative w-full h-full bg-gradient-to-r from-black to-gray-700 ">
             <IndexNavbar />
@@ -33,14 +60,16 @@ export default function Index() {
             />
           </div>
 
-          <div className="ml-3 pl-3 absolute w-full inset-y-48 text-white   ">
+          <div className="ml-3 sm:px-3  absolute w-full inset-y-32 lg:inset-y-48 text-white   ">
             <div className="flex flex-col items-center">
-              <div className="font-serif text-xl font-medium">
+              <div className="font-serif text-base text-center sm:text-2xl font-medium">
                 A collection of 3,500 unique clans living on the Ethereum
                 blockchain.
               </div>
-              <h1 className="font-serif text-7xl mt-20 font-bold">AQUA CLUB</h1>
-              <p className="text-sm font-sans font-medium mt-2">
+              <h1 className="sm:text-7xl text-5xl mt-20 font-bold font-heading">
+                AQUA CLUB
+              </h1>
+              <p className="text-base sm:text-xl text-center font-sans font-medium mt-2">
                 Are you a whale, a shark, a dolphin, a crab or a shrimp?
               </p>
             </div>
@@ -56,52 +85,53 @@ export default function Index() {
         </div>
       </section>
       <section className=" py-12 border-x-0 border-t-0 border-b border-b-white mx-12 ">
-        <div className="flex">
-          <div className="w-8/12">
-            <h1 className="text-3xl text-white font-medium font-serif">
+        <div className="flex lg:flex-row flex-col">
+          <div className="lg:w-8/12">
+            <h1 className="text-3xl text-white font-medium font-sans">
               WELCOME TO THE THE AQUA CLUB
             </h1>
 
             <div className="flex">
-              <p className="w-8/12 text-gray-200 py-2 text-lg">
+              <p className="lg:w-8/12 text-gray-200 py-2 text-lg font-hand">
                 When you buy an AQUA clan, you will never be poor again and if
                 you later turn out poor, he no concern us.
               </p>
             </div>
           </div>
-
-          <div className="grid grid-rows-2 grid-cols-1 gap-2 w-4/12 h-72">
-            <div className="grid grid-rows-1 grid-cols-2 gap-2">
-              <div className="bg-red-100 rounded-md">
-                <img
-                  alt="..."
-                  src="/img/tutle.jpg"
-                  className="object-cover w-full h-full rounded-md"
-                />
+          <div className="lg:w-4/12">
+            <div className="grid grid-rows-2 grid-cols-1 gap-2 h-auto">
+              <div className="grid grid-rows-1 grid-cols-2 gap-2">
+                <div className="bg-red-100 rounded-md">
+                  <img
+                    alt="..."
+                    src="/img/tutle.jpg"
+                    className="object-cover w-full h-full rounded-md"
+                  />
+                </div>
+                <div className="bg-red-100 rounded-md">
+                  <img
+                    alt="..."
+                    src="/img/meta.jpg"
+                    className="object-cover w-full h-full rounded-md"
+                  />
+                </div>
               </div>
-              <div className="bg-red-100 rounded-md">
-                <img
-                  alt="..."
-                  src="/img/meta.jpg"
-                  className="object-cover w-full h-full rounded-md"
-                />
-              </div>
-            </div>
-            <div className="grid grid-rows-1 grid-cols-2 gap-2">
-              <div className="bg-red-400 rounded-md">
-                {" "}
-                <img
-                  alt="..."
-                  src="/img/meta.jpg"
-                  className="object-cover w-full h-full rounded-md"
-                />
-              </div>
-              <div className="bg-red-400 rounded-md">
-                <img
-                  alt="..."
-                  src="/img/tutle.jpg"
-                  className="object-cover w-full h-full rounded-md"
-                />
+              <div className="grid grid-rows-1 grid-cols-2 gap-2">
+                <div className="bg-red-400 rounded-md">
+                  {" "}
+                  <img
+                    alt="..."
+                    src="/img/meta.jpg"
+                    className="object-cover w-full h-full rounded-md"
+                  />
+                </div>
+                <div className="bg-red-400 rounded-md">
+                  <img
+                    alt="..."
+                    src="/img/tutle.jpg"
+                    className="object-cover w-full h-full rounded-md"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -111,19 +141,19 @@ export default function Index() {
       <section className="border-x-0 border-t-0 border-b border-b-white py-12 mx-12 text-white ">
         <div className="flex flex-col items-center">
           <h1 className="text-3xl text-white font-medium font-serif">Rarity</h1>
-          <p>
+          <p className="font-hand text-xl">
             Each NFT is algorithmically generated by combining 110+ unique
             traits with varying rarity across categories:
           </p>
-          <ul className="list-disc marker:text-green flex flex-nowrap mx-2">
+          <ul className="list-disc flex flex-nowrap mx-2 font-hand">
             <li className="mx-4">Body</li>
             <li className="mx-4">Eyes</li>
             <li className="mx-4">Whiskers</li>
             <li className="mx-4">Ears</li>
           </ul>
-          <div className="flex justify-around mt-3 ">
-            <div className="flex flex-wrap flex-col items-center px-3">
-              <div className="w-64">
+          <div className="flex lg:flex-row flex-col justify-around mt-3 font-hand">
+            <div className="flex flex-wrap flex-col items-center px-3 mt-6 lg:mt-0">
+              <div className="w-64 ">
                 <img
                   alt="..."
                   src="/img/fish2.jpg"
@@ -135,7 +165,7 @@ export default function Index() {
               <p className="text-gray-500 py-2">Not really common.</p>
               <p className="">Fighting Power - Great</p>
             </div>
-            <div className="flex flex-wrap flex-col items-center px-3 ">
+            <div className="flex flex-wrap flex-col items-center px-3 mt-6 lg:mt-0">
               <div className="w-64">
                 <img
                   alt="..."
@@ -145,10 +175,10 @@ export default function Index() {
               </div>
 
               <p className="text-xl font-medium pt-2"> * Expert Clan *</p>
-              <p className="text-gray-500 py-2">Very Expert.</p>
+              <p className="text-gray-500 py-1">Very Expert.</p>
               <p className="">Fighting Power - Phenomenal</p>
             </div>
-            <div className="flex flex-wrap flex-col items-center px-3">
+            <div className="flex flex-wrap flex-col items-center px-3 mt-6 lg:mt-0">
               <div className="w-64">
                 <img
                   alt="..."
@@ -170,7 +200,7 @@ export default function Index() {
           AQUA VISION
         </h1>
 
-        <p>
+        <p className="font-hand text-2xl">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
           mollitia, molestiae quas vel sint commodi repudiandae consequuntur
           voluptatum laborum numquam blanditiis harum quisquam eius sed odit
@@ -194,8 +224,8 @@ export default function Index() {
         <h1 className="text-3xl text-white font-medium font-serif">
           MEET THE TEAMS
         </h1>
-        <div className="flex justify-start mt-3 ">
-          <div className="flex flex-wrap flex-col items-center px-3">
+        <div className="flex lg:flex-row flex-col justify-start mt-3 font-hand">
+          <div className="flex flex-wrap flex-col items-center px-3 mt-4 lg:mt-0">
             <div className="w-64">
               <img
                 alt="..."
@@ -205,10 +235,9 @@ export default function Index() {
             </div>
 
             <p className="text-2xl font-medium pt-2"> Hustle Danie</p>
-            <p className="text-gray-500 py-2">Aqua Clan 001</p>
-            
+            <p className="text-gray-500 py-1">Aqua Clan 001</p>
           </div>
-          <div className="flex flex-wrap flex-col items-center px-3 ">
+          <div className="flex flex-wrap flex-col items-center px-3 mt-4 lg:mt-0">
             <div className="w-64">
               <img
                 alt="..."
@@ -218,10 +247,9 @@ export default function Index() {
             </div>
 
             <p className="text-2xl font-medium pt-2"> Code Larry</p>
-            <p className="text-gray-500 py-2">Developer</p>
-          
+            <p className="text-gray-500 py-1">Developer</p>
           </div>
-          <div className="flex flex-wrap flex-col items-center px-3">
+          <div className="flex flex-wrap flex-col items-center px-3 mt-4 lg:mt-0">
             <div className="w-64">
               <img
                 alt="..."
@@ -232,20 +260,16 @@ export default function Index() {
 
             <p className="text-2xl font-medium pt-2"> XYZ</p>
             <p className="text-gray-500 py-2">Artist</p>
-           
           </div>
         </div>
       </section>
 
-      <footer className="border-x-0 border-t-0 border-b border-b-white py-12 mx-12 text-white">
-        <h1 className="text-3xl text-white font-medium font-serif">
-          FAQ
-        </h1>
-        
-        <ul>
-          <li>What is the total supply of AQUA clans?</li>
-        </ul>
+      <footer className="border-x-0 border-t-0 border-b border-b-white py-12 mx-12 text-white font-hand">
+        <h1 className="text-3xl text-white font-medium font-serif py-3">FAQ</h1>
+
+        <Faq data={data} styles={styles} config={config} />
       </footer>
+      {/* <Footer /> */}
 
       {/* <div className="ml-3 absolute top-52 text-white font-bold text-9xl ">
             AQUA CLUB
@@ -865,3 +889,105 @@ export default function Index() {
     </div>
   );
 }
+/*
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Frequently Asked Questions In Tailwindcss and JavaScript</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+      body{
+      font-family: 'Lato', sans-serif;
+      margin: 0px;
+          background: #f2f2f2;
+      }
+      .active{
+      color: #60a3bc;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="md:text-7xl text-2xl py-4 text-center">
+      Frequently Asked Questions
+    </h1>
+    <div class="md:container w-fit md:mx-auto mx-3 ">
+      <div class="content dd bg-white" data-no="0">
+        <div class="questions  cursor-pointer flex items-center bg-cyan-500 p-3 text-white mb-1 active" data-no="0">
+          <div class="heading w-11/12">
+            <h4 class="text-2xl">What is HTML</h4>
+          </div>
+          <div class="icons w-1/12 text-right">
+            <i class="fa fa-minus-square text-2xl"></i>
+          </div>
+        </div>
+        <p class="openSlide text-1xl px-3 pb-3" id="openSlide0">The HyperText Markup Language, or HTML is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets and scripting languages such as JavaScript.</p>
+      </div>
+      <div class="content d bg-white" data-no="1">
+        <div class="questions  cursor-pointer flex items-center bg-cyan-500 p-3 text-white mb-1" data-no="1">
+          <div class="heading w-11/12">
+            <h4 class="text-2xl">What is CSS</h4>
+          </div>
+          <div class="icons w-1/12 text-right">
+            <i class="fa fa-plus-square text-2xl"></i>
+          </div>
+        </div>
+        <p class="openSlide text-1xl px-3 pb-3" id="openSlide1">Cascading Style Sheets is a style sheet language used for describing the presentation of a document written in a markup language such as HTML. CSS is a cornerstone technology of the World Wide Web, alongside HTML and JavaScript.</p>
+      </div>
+      <div class="content bg-white" data-no="2">
+        <div class="questions  cursor-pointer flex items-center bg-cyan-500 p-3 text-white mb-1" data-no="2">
+          <div class="heading w-11/12">
+            <h4 class="text-2xl">What is javascript</h4>
+          </div>
+          <div class="icons w-1/12 text-right">
+            <i class="fa fa-plus-square text-2xl"></i>
+          </div>
+        </div>
+        <p class="openSlide text-1xl px-3 pb-3" id="openSlide2">JavaScript, often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions.</p>
+      </div>
+      <div class="content bg-white" data-no="3">
+        <div class="questions  cursor-pointer flex items-center bg-cyan-500 p-3 text-white mb-1" data-no="3">
+          <div class="heading w-11/12">
+            <h4 class="text-2xl">What is jQuery</h4>
+          </div>
+          <div class="icons w-1/12 text-right">
+            <i class="fa fa-plus-square text-2xl"></i>
+          </div>
+        </div>
+        <p class="openSlide text-1xl px-3 pb-3" id="openSlide3">jQuery is a JavaScript library designed to simplify HTML DOM tree traversal and manipulation, as well as event handling, CSS animation, and Ajax. It is free, open-source software using the permissive MIT License. As of May 2019, jQuery is used by 73% of the 10 million most popular websites.</p>
+      </div>
+    </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript">
+      (function () {
+        let sliderOpen = $('.openSlide');
+        sliderOpen.hide();
+        sliderOpen.eq(0).show();
+        $('.questions').on('click', function () {
+          let dataNo = $(this).attr('data-no');
+          let xy = $(this);
+          $('.content').each(function() {
+            let eachdatano = $(this).attr('data-no');
+            if (dataNo == eachdatano) {
+              xy.next().slideToggle();
+              xy.addClass('active');
+              xy.find('i').toggleClass("fa-plus-square fa-minus-square");
+            } else if (dataNo != eachdatano) {
+              $(this).find('p#openSlide'+eachdatano).slideUp(); 
+              $(this).find('.questions').removeClass("active");; 
+              $(this).find('i').removeClass("fa-minus-square");; 
+              $(this).find('i').addClass("fa-plus-square");; 
+            }
+          })
+        })
+      })();
+    </script>
+  </body>
+</html>
+
+*/

@@ -8,7 +8,7 @@ export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <>
-      <nav className="w-full absolute flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg border-t-0 border-x-0 border-b border-b-black">
+      <nav className="w-full absolute flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg border-t-0 border-x-0 border-b border-b-black bg-transparent">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link href="/">
