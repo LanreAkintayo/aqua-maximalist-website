@@ -1,62 +1,262 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 
 export default function Index() {
   return (
-    <>
-      <IndexNavbar fixed />
-      <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
-        <div className="container mx-auto items-center flex flex-wrap">
-          <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
-            <div className="pt-32 sm:pt-0">
-              <h2 className="font-semibold text-4xl text-blueGray-600">
-                Notus NextJS - A beautiful extension for Tailwind CSS.
-              </h2>
-              <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
-                Notus NextJS is Free and Open Source. It does not change any of
-                the CSS from{" "}
-                <a
-                  href="https://tailwindcss.com/?ref=creativetim"
-                  className="text-blueGray-600"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Tailwind CSS
-                </a>
-                . It features multiple HTML elements and it comes with dynamic
-                components for ReactJS, Vue and Angular.
+    <div className="bg-black px-3">
+      {/* <div className="relative w-full h-96 bg-gradient-to-tl from-yellow-900 to-green-700 mt-3">
+        <img
+          alt="..."
+          src="/img/fish.jpg"
+          className="object-cover absolute w-full h-full mix-blend-overlay"
+        />
+        <div>
+          <h1 className="text-white font-bold">This is the headline</h1>
+        </div>
+      </div> */}
+
+      <section className="w-full h-screen">
+        {/*  */}
+
+        <div className="relative w-full h-full">
+          <div className="relative w-full h-full bg-gradient-to-r from-black to-gray-700 ">
+            <IndexNavbar />
+            <img
+              alt="..."
+              src="/img/tutle.jpg"
+              className="object-cover absolute w-full h-full opacity-1 mix-blend-overlay"
+            />
+          </div>
+
+          <div className="ml-3 pl-3 absolute w-full inset-y-48 text-white   ">
+            <div className="flex flex-col items-center">
+              <div className="font-serif text-xl font-medium">
+                A collection of 3,500 unique clans living on the Ethereum
+                blockchain.
+              </div>
+              <h1 className="font-serif text-7xl mt-20 font-bold">AQUA CLUB</h1>
+              <p className="text-sm font-sans font-medium mt-2">
+                Are you a whale, a shark, a dolphin, a crab or a shrimp?
               </p>
-              <div className="mt-12">
-                <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/overview/notus?ref=nnjs-index"
-                  target="_blank"
-                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-400 active:bg-blueGray-500 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-                >
-                  Get started
-                </a>
-                <a
-                  href="https://github.com/creativetimofficial/notus-nextjs?ref=nnjs-index"
-                  className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
-                  target="_blank"
-                >
-                  Github Star
-                </a>
+            </div>
+          </div>
+
+          {/* <div className="w-96 h-96 border rounded-lg border-white top-40 left-1/2 absolute text-white bg-gradient-to-tl from-black to-gray-600">
+            <img
+              alt="..."
+              src="/img/meta.jpg"
+              className="object-cover rounded-md absolute w-full h-full mix-blend-overlay"
+            />
+          </div> */}
+        </div>
+      </section>
+      <section className=" py-12 border-x-0 border-t-0 border-b border-b-white mx-12 ">
+        <div className="flex">
+          <div className="w-8/12">
+            <h1 className="text-3xl text-white font-medium font-serif">
+              WELCOME TO THE THE AQUA CLUB
+            </h1>
+
+            <div className="flex">
+              <p className="w-8/12 text-gray-200 py-2 text-lg">
+                When you buy an AQUA clan, you will never be poor again and if
+                you later turn out poor, he no concern us.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-rows-2 grid-cols-1 gap-2 w-4/12 h-72">
+            <div className="grid grid-rows-1 grid-cols-2 gap-2">
+              <div className="bg-red-100 rounded-md">
+                <img
+                  alt="..."
+                  src="/img/tutle.jpg"
+                  className="object-cover w-full h-full rounded-md"
+                />
+              </div>
+              <div className="bg-red-100 rounded-md">
+                <img
+                  alt="..."
+                  src="/img/meta.jpg"
+                  className="object-cover w-full h-full rounded-md"
+                />
+              </div>
+            </div>
+            <div className="grid grid-rows-1 grid-cols-2 gap-2">
+              <div className="bg-red-400 rounded-md">
+                {" "}
+                <img
+                  alt="..."
+                  src="/img/meta.jpg"
+                  className="object-cover w-full h-full rounded-md"
+                />
+              </div>
+              <div className="bg-red-400 rounded-md">
+                <img
+                  alt="..."
+                  src="/img/tutle.jpg"
+                  className="object-cover w-full h-full rounded-md"
+                />
               </div>
             </div>
           </div>
         </div>
-        <img
-          className="absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860-px"
-          src="/img/pattern_nextjs.png"
-          alt="..."
-        />
       </section>
 
-      <section className="mt-48 md:mt-40 pb-40 relative bg-blueGray-100">
+      <section className="border-x-0 border-t-0 border-b border-b-white py-12 mx-12 text-white ">
+        <div className="flex flex-col items-center">
+          <h1 className="text-3xl text-white font-medium font-serif">Rarity</h1>
+          <p>
+            Each NFT is algorithmically generated by combining 110+ unique
+            traits with varying rarity across categories:
+          </p>
+          <ul className="list-disc marker:text-green flex flex-nowrap mx-2">
+            <li className="mx-4">Body</li>
+            <li className="mx-4">Eyes</li>
+            <li className="mx-4">Whiskers</li>
+            <li className="mx-4">Ears</li>
+          </ul>
+          <div className="flex justify-around mt-3 ">
+            <div className="flex flex-wrap flex-col items-center px-3">
+              <div className="w-64">
+                <img
+                  alt="..."
+                  src="/img/fish2.jpg"
+                  className="object-cover w-full h-full rounded-md"
+                />
+              </div>
+
+              <p className="text-xl font-medium pt-2"> - Novice Clan -</p>
+              <p className="text-gray-500 py-2">Not really common.</p>
+              <p className="">Fighting Power - Great</p>
+            </div>
+            <div className="flex flex-wrap flex-col items-center px-3 ">
+              <div className="w-64">
+                <img
+                  alt="..."
+                  src="/img/fish3.jpg"
+                  className="object-cover w-full h-full rounded-md"
+                />
+              </div>
+
+              <p className="text-xl font-medium pt-2"> * Expert Clan *</p>
+              <p className="text-gray-500 py-2">Very Expert.</p>
+              <p className="">Fighting Power - Phenomenal</p>
+            </div>
+            <div className="flex flex-wrap flex-col items-center px-3">
+              <div className="w-64">
+                <img
+                  alt="..."
+                  src="/img/fish4.png"
+                  className="object-cover w-full h-full rounded-md"
+                />
+              </div>
+
+              <p className="text-xl font-medium pt-2"> *** Legend Clan ***</p>
+              <p className="text-gray-500 py-2">Have this and be unbeatable.</p>
+              <p className="">Fighting Power - Genius</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-x-0 border-t-0 border-b border-b-white py-12 mx-12 text-white">
+        <h1 className="text-3xl text-white font-medium font-serif">
+          AQUA VISION
+        </h1>
+
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+          mollitia, molestiae quas vel sint commodi repudiandae consequuntur
+          voluptatum laborum numquam blanditiis harum quisquam eius sed odit
+          fugiat iusto fuga praesentium optio, eaque rerum! Provident similique
+          accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut
+          molestias architecto voluptate aliquam nihil, eveniet aliquid culpa
+          officia aut! Impedit sit sunt quaerat, odit, tenetur error, harum
+          nesciunt ipsum debitis quas aliquid. Reprehenderit, quia. Quo neque
+          error repudiandae fuga? Ipsa laudantium molestias eos sapiente
+          officiis modi at sunt excepturi expedita sint? Sed quibusdam
+          recusandae alias error harum maxime adipisci amet laborum.
+          Perspiciatis minima nesciunt dolorem! Officiis iure rerum voluptates a
+          cumque velit quibusdam sed amet tempora. Sit laborum ab, eius fugit
+          doloribus tenetur fugiat, temporibus enim commodi iusto libero magni
+          deleniti quod quam consequuntur! Commodi minima excepturi repudiandae
+          velit hic maxime doloremque
+        </p>
+      </section>
+
+      <section className="border-x-0 border-t-0 border-b border-b-white py-12 mx-12 text-white">
+        <h1 className="text-3xl text-white font-medium font-serif">
+          MEET THE TEAMS
+        </h1>
+        <div className="flex justify-start mt-3 ">
+          <div className="flex flex-wrap flex-col items-center px-3">
+            <div className="w-64">
+              <img
+                alt="..."
+                src="/img/huslte.jpg"
+                className="object-cover w-full h-full rounded-md"
+              />
+            </div>
+
+            <p className="text-2xl font-medium pt-2"> Hustle Danie</p>
+            <p className="text-gray-500 py-2">Aqua Clan 001</p>
+            
+          </div>
+          <div className="flex flex-wrap flex-col items-center px-3 ">
+            <div className="w-64">
+              <img
+                alt="..."
+                src="/img/lanre.jpg"
+                className="object-cover w-full h-full rounded-md"
+              />
+            </div>
+
+            <p className="text-2xl font-medium pt-2"> Code Larry</p>
+            <p className="text-gray-500 py-2">Developer</p>
+          
+          </div>
+          <div className="flex flex-wrap flex-col items-center px-3">
+            <div className="w-64">
+              <img
+                alt="..."
+                src="/img/artist2.jpg"
+                className="object-cover w-full h-full rounded-md"
+              />
+            </div>
+
+            <p className="text-2xl font-medium pt-2"> XYZ</p>
+            <p className="text-gray-500 py-2">Artist</p>
+           
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-x-0 border-t-0 border-b border-b-white py-12 mx-12 text-white">
+        <h1 className="text-3xl text-white font-medium font-serif">
+          FAQ
+        </h1>
+        
+        <ul>
+          <li>What is the total supply of AQUA clans?</li>
+        </ul>
+      </footer>
+
+      {/* <div className="ml-3 absolute top-52 text-white font-bold text-9xl ">
+            AQUA CLUB
+          </div> */}
+
+      {/* <header
+        className="relative bg-fixed bg-center bg-cover bg-no-repeat"
+        style={"backgroundImage:linear-gradient(rgba(135, 80, 156, 0.9), rgba(135, 80, 156, 0.9)), url(img/fish.jpg)"}
+      ></header> */}
+
+      {/* <section className="mt-48 md:mt-40 pb-40 relative bg-blueGray-100">
         <div
           className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
           style={{ transform: "translateZ(0)" }}
@@ -502,9 +702,9 @@ export default function Index() {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <section className="block relative z-1 bg-blueGray-600">
+      {/* <section className="block relative z-1 bg-blueGray-600">
         <div className="container mx-auto">
           <div className="justify-center flex flex-wrap">
             <div className="w-full lg:w-12/12 px-4  -mt-24">
@@ -557,9 +757,9 @@ export default function Index() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <section className="py-20 bg-blueGray-600 overflow-hidden">
+      {/* <section className="py-20 bg-blueGray-600 overflow-hidden">
         <div className="container mx-auto pb-64">
           <div className="flex flex-wrap justify-center">
             <div className="w-full md:w-5/12 px-12 md:px-4 ml-auto mr-auto md:mt-64">
@@ -600,9 +800,9 @@ export default function Index() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <section className="pb-16 bg-blueGray-200 relative pt-32">
+      {/* <section className="pb-16 bg-blueGray-200 relative pt-32">
         <div
           className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
           style={{ transform: "translateZ(0)" }}
@@ -660,8 +860,8 @@ export default function Index() {
             </div>
           </div>
         </div>
-      </section>
-      <Footer />
-    </>
+      </section> */}
+      {/* <Footer /> */}
+    </div>
   );
 }
