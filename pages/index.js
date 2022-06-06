@@ -48,7 +48,7 @@ const config = {
 
 export default function Index() {
   return (
-    <div className="bg-black px-3">
+    <div className="bg-black px-1 sm:px-3">
       <section className="w-full h-screen">
         <div className="relative w-full h-full">
           <div className="relative w-full h-full bg-gradient-to-r from-black to-gray-700 ">
@@ -84,7 +84,7 @@ export default function Index() {
           </div> */}
         </div>
       </section>
-      <section className=" py-12 border-x-0 border-t-0 border-b border-b-white mx-12 ">
+      <section className=" py-12 border-x-0 border-t-0 border-b border-b-white mx-4 sm:mx-12 ">
         <div className="flex lg:flex-row flex-col">
           <div className="lg:w-8/12">
             <h1 className="text-3xl text-white font-medium font-sans">
@@ -138,7 +138,7 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="border-x-0 border-t-0 border-b border-b-white py-12 mx-12 text-white ">
+      <section className="border-x-0 border-t-0 border-b border-b-white py-12 mx-4 sm:mx-12 text-white ">
         <div className="flex flex-col items-center">
           <h1 className="text-3xl text-white font-medium font-serif">Rarity</h1>
           <p className="font-hand text-xl">
@@ -195,7 +195,7 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="border-x-0 border-t-0 border-b border-b-white py-12 mx-12 text-white">
+      <section className="border-x-0 border-t-0 border-b border-b-white py-12 mx-4 sm:mx-12 text-white">
         <h1 className="text-3xl text-white font-medium font-serif">
           AQUA VISION
         </h1>
@@ -220,7 +220,7 @@ export default function Index() {
         </p>
       </section>
 
-      <section className="border-x-0 border-t-0 border-b border-b-white py-12 mx-12 text-white">
+      <section className="border-x-0 border-t-0 border-b border-b-white py-12 mx-4 sm:mx-12 text-white">
         <h1 className="text-3xl text-white font-medium font-serif">
           MEET THE TEAMS
         </h1>
@@ -264,7 +264,7 @@ export default function Index() {
         </div>
       </section>
 
-      <footer className="border-x-0 border-t-0 border-b border-b-white py-12 mx-12 text-white font-hand">
+      <footer className="border-x-0 border-t-0 border-b border-b-white py-12 mx-4 sm:mx-12 text-white font-hand">
         <h1 className="text-3xl text-white font-medium font-serif py-3">FAQ</h1>
 
         <Faq data={data} styles={styles} config={config} />
