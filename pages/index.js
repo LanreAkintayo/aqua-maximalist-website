@@ -60,16 +60,16 @@ export default function Index() {
             />
           </div>
 
-          <div className="ml-3 sm:px-3  absolute w-full inset-y-32 lg:inset-y-48 text-white   ">
+          <div className="sm:px-3  absolute w-full inset-y-32 lg:inset-y-48 text-white   ">
             <div className="flex flex-col items-center">
-              <div className="font-serif text-base text-center sm:text-2xl font-medium">
+              <div className="font-serif text-base text-center sm:text-2xl font-medium px-2">
                 A collection of 3,500 unique clans living on the Ethereum
                 blockchain.
               </div>
               <h1 className="sm:text-7xl text-5xl mt-20 font-bold font-heading">
                 AQUA CLUB
               </h1>
-              <p className="text-base sm:text-xl text-center font-sans font-medium mt-2">
+              <p className="text-base sm:text-xl text-center font-sans font-medium mt-2 px-2 ">
                 Are you a whale, a shark, a dolphin, a crab or a shrimp?
               </p>
             </div>
@@ -200,7 +200,7 @@ export default function Index() {
           AQUA VISION
         </h1>
 
-        <p className="font-hand text-2xl">
+        <p className="font-hand text-xl sm:text-2xl">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
           mollitia, molestiae quas vel sint commodi repudiandae consequuntur
           voluptatum laborum numquam blanditiis harum quisquam eius sed odit
