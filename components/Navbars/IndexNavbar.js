@@ -21,7 +21,7 @@ export default function Navbar(props) {
 
           <div className="flex">
             <button
-              className="p-2 rounded-full text-xl font-medium bg-white px-3 font-hand"
+              className="p-2 rounded-full text-sm sm:text-xl font-medium bg-white sm:px-3 font-hand"
               onClick={() => {
                 console.log("Mint some clans");
               }}
