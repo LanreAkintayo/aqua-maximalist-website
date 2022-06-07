@@ -49,18 +49,19 @@ const config = {
 export default function Index() {
   return (
     <div className="bg-black px-1 sm:px-3">
+      
       <section className="w-full h-screen">
         <div className="relative w-full h-full">
           <div className="relative w-full h-full bg-gradient-to-r from-black to-gray-700 ">
             <IndexNavbar />
             <img
               alt="..."
-              src="/img/tutle.jpg"
+              src="/img/background2.jpg"
               className="object-cover absolute w-full h-full opacity-1 mix-blend-overlay"
             />
           </div>
 
-          <div className="sm:px-3  absolute w-full inset-y-32 lg:inset-y-48 text-white   ">
+          <div className="sm:px-3  absolute w-full inset-y-32 lg:inset-y-48 text-white  ">
             <div className="flex flex-col items-center">
               <div className="font-serif text-base text-center sm:text-2xl font-medium px-2">
                 A collection of 3,500 unique clans living on the Ethereum
@@ -72,6 +73,7 @@ export default function Index() {
               <p className="text-base sm:text-xl text-center font-sans font-medium mt-2 px-2 ">
                 Are you a whale, a shark, a dolphin, a crab or a shrimp?
               </p>
+              <button className="p-2 px-3 font-hand text-3xl text-black border-2 bg-white mt-6 font-medium rounded-full">View on Opensea</button>
             </div>
           </div>
 
@@ -84,7 +86,7 @@ export default function Index() {
           </div> */}
         </div>
       </section>
-      <section className=" py-12 border-x-0 border-t-0 border-b border-b-white mx-4 sm:mx-12 ">
+      <section className=" py-12 border-x-0 border-t-0 border-b border-b-slate-600 mx-4 sm:mx-12 ">
         <div className="flex lg:flex-row flex-col">
           <div className="lg:w-8/12">
             <h1 className="text-3xl text-white font-medium font-sans">
@@ -138,7 +140,7 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="border-x-0 border-t-0 border-b border-b-white py-12 mx-4 sm:mx-12 text-white ">
+      <section className="border-x-0 border-t-0 border-b border-b-slate-600 py-12 mx-4 sm:mx-12 text-white ">
         <div className="flex flex-col items-center">
           <h1 className="text-3xl text-white font-medium font-serif">Rarity</h1>
           <p className="font-hand text-xl">
@@ -195,7 +197,7 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="border-x-0 border-t-0 border-b border-b-white py-12 mx-4 sm:mx-12 text-white">
+      <section className="border-x-0 border-t-0 border-b border-b-slate-600 py-12 mx-4 sm:mx-12 text-white">
         <h1 className="text-3xl text-white font-medium font-serif">
           AQUA VISION
         </h1>
@@ -220,7 +222,7 @@ export default function Index() {
         </p>
       </section>
 
-      <section className="border-x-0 border-t-0 border-b border-b-white py-12 mx-4 sm:mx-12 text-white">
+      <section className="border-x-0 border-t-0 border-b border-b-slate-600 py-12 mx-4 sm:mx-12 text-white">
         <h1 className="text-3xl text-white font-medium font-serif">
           MEET THE TEAMS
         </h1>
@@ -264,10 +266,53 @@ export default function Index() {
         </div>
       </section>
 
-      <footer className="border-x-0 border-t-0 border-b border-b-white py-12 mx-4 sm:mx-12 text-white font-hand">
+      <section className=" py-12 mx-4 sm:mx-12 text-white font-hand">
         <h1 className="text-3xl text-white font-medium font-serif py-3">FAQ</h1>
 
         <Faq data={data} styles={styles} config={config} />
+      </section>
+
+      <footer className="relative pt-8 pb-6">
+        <div
+          className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20"
+          style={{ transform: "translateZ(0)" }}
+        >
+          {/* <svg
+            className="absolute bottom-0 overflow-hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            version="1.1"
+            viewBox="0 0 2560 100"
+            x="0"
+            y="0"
+          >
+            <polygon
+              className="text-blueGray-200 fill-current"
+              points="2560 0 2560 100 0 100"
+            ></polygon>
+          </svg> */}
+        </div>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap text-center lg:text-left">
+           
+           
+          </div>
+          {/* <hr className="my-6" /> */}
+          <div className="flex flex-wrap items-center md:justify-between justify-center">
+            <div className="w-full md:w-4/12 px-4 mx-auto text-center">
+              <div className="text-sm text-blueGray-500 font-semibold py-1">
+                Copyright © {new Date().getFullYear()} {" "}
+                <a
+                  href="https://www.creative-tim.com?ref=nnjs-footer"
+                  className="text-blueGray-500 hover:text-blueGray-800"
+                >
+                  Aqua Clan
+                </a>
+                .
+              </div>
+            </div>
+          </div>
+        </div>
       </footer>
       {/* <Footer /> */}
 
