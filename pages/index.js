@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-
+import { Link } from "react-scroll";
+import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import Faq from "react-faq-component";
+import { useState } from "react";
 
 const data = {
   title: "",
@@ -47,13 +47,22 @@ const config = {
 };
 
 export default function Index() {
+  const [navOpen, setNavOpen] = useState(false);
+
+  const handleNavbar = () => {
+    setNavOpen((prev) => {
+      console.log(prev);
+      setNavOpen(!prev);
+    });
+  };
+
   return (
-    <div className="bg-black px-1 sm:px-3">
-      
-      <section className="w-full h-screen">
+    <div className={`bg-black ${navOpen && "fixed"} `}>
+      <section className={`w-full h-screen ${navOpen && "overscroll-none"}`}>
         <div className="relative w-full h-full">
-          <div className="relative w-full h-full bg-gradient-to-r from-black to-gray-700 ">
-            <IndexNavbar />
+          <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray-700 ">
+            <IndexNavbar handleNavbar={handleNavbar} />
+
             <img
               alt="..."
               src="/img/background2.jpg"
@@ -73,9 +82,111 @@ export default function Index() {
               <p className="text-base sm:text-xl text-center font-sans font-medium mt-2 px-2 ">
                 Are you a whale, a shark, a dolphin, a crab or a shrimp?
               </p>
-              <button className="p-2 px-3 font-hand text-3xl text-black border-2 bg-white mt-6 font-medium rounded-full">View on Opensea</button>
+              <button className="p-2 px-3 font-hand text-3xl text-black border-2 bg-white mt-6 font-medium rounded-full">
+                View on Opensea
+              </button>
             </div>
           </div>
+
+          <aside
+            className={`fixed top-0 left-0 ${!navOpen && "hidden"} bg-black`}
+            aria-label="Sidebar"
+          >
+            <div className="overflow-y-auto w-72  bg-black py-4 h-screen px-3 text-white rounded text-center font-hand  dark:bg-gray-800">
+              <ul className="space-y-2 text-2xl">
+                <li className="">
+                  <Link
+                    activeClass="active"
+                    href="about"
+                    to="about"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={500}
+                  >
+                    <span
+                      className="dark:text-white hover:text-gray-400 dark:hover:text-gray-700"
+                      onClick={() => handleNavbar()}
+                    >
+                      About
+                    </span>
+                  </Link>
+                </li>
+                <li className="mt-5">
+                  <Link
+                    activeClass="active"
+                    href="rarity"
+                    to="rarity"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={500}
+                  >
+                    <span
+                      className="dark:text-white hover:text-gray-400 dark:hover:text-gray-700"
+                      onClick={() => handleNavbar()}
+                    >
+                      Rarity
+                    </span>
+                  </Link>
+                </li>
+                <li className="mt-5">
+                  <Link
+                    activeClass="active"
+                    href="vision"
+                    to="vision"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={500}
+                  >
+                    <span
+                      className="dark:text-white hover:text-gray-400 dark:hover:text-gray-700"
+                      onClick={() => handleNavbar()}
+                    >
+                      Our Vision
+                    </span>
+                  </Link>
+                </li>
+                <li className="mt-5">
+                  <Link
+                    activeClass="active"
+                    href="team"
+                    to="team"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={500}
+                  >
+                    <span
+                      className="dark:text-white hover:text-gray-400 dark:hover:text-gray-700"
+                      onClick={() => handleNavbar()}
+                    >
+                      Our Team
+                    </span>
+                  </Link>
+                </li>
+                <li className="mt-5">
+                  <Link
+                    activeClass="active"
+                    href="faq"
+                    to="faq"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={500}
+                  >
+                    <span
+                      className="dark:text-white hover:text-gray-400 dark:hover:text-gray-700"
+                      onClick={() => handleNavbar()}
+                    >
+                      FAQ
+                    </span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </aside>
 
           {/* <div className="w-96 h-96 border rounded-lg border-white top-40 left-1/2 absolute text-white bg-gradient-to-tl from-black to-gray-600">
             <img
@@ -86,7 +197,10 @@ export default function Index() {
           </div> */}
         </div>
       </section>
-      <section className=" py-12 border-x-0 border-t-0 border-b border-b-slate-600 mx-4 sm:mx-12 ">
+      <section
+        className=" py-12 border-x-0 border-t-0 border-b border-b-slate-600 mx-4 sm:mx-12 "
+        id="about"
+      >
         <div className="flex lg:flex-row flex-col">
           <div className="lg:w-8/12">
             <h1 className="text-3xl text-white font-medium font-sans">
@@ -140,7 +254,10 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="border-x-0 border-t-0 border-b border-b-slate-600 py-12 mx-4 sm:mx-12 text-white ">
+      <section
+        className="border-x-0 border-t-0 border-b border-b-slate-600 py-12 mx-4 sm:mx-12 text-white "
+        id="rarity"
+      >
         <div className="flex flex-col items-center">
           <h1 className="text-3xl text-white font-medium font-serif">Rarity</h1>
           <p className="font-hand text-xl">
@@ -197,7 +314,10 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="border-x-0 border-t-0 border-b border-b-slate-600 py-12 mx-4 sm:mx-12 text-white">
+      <section
+        className="border-x-0 border-t-0 border-b border-b-slate-600 py-12 mx-4 sm:mx-12 text-white"
+        id="vision"
+      >
         <h1 className="text-3xl text-white font-medium font-serif">
           AQUA VISION
         </h1>
@@ -222,7 +342,10 @@ export default function Index() {
         </p>
       </section>
 
-      <section className="border-x-0 border-t-0 border-b border-b-slate-600 py-12 mx-4 sm:mx-12 text-white">
+      <section
+        className="border-x-0 border-t-0 border-b border-b-slate-600 py-12 mx-4 sm:mx-12 text-white"
+        id="team"
+      >
         <h1 className="text-3xl text-white font-medium font-serif">
           MEET THE TEAMS
         </h1>
@@ -266,7 +389,7 @@ export default function Index() {
         </div>
       </section>
 
-      <section className=" py-12 mx-4 sm:mx-12 text-white font-hand">
+      <section className=" py-12 mx-4 sm:mx-12 text-white font-hand" id="faq">
         <h1 className="text-3xl text-white font-medium font-serif py-3">FAQ</h1>
 
         <Faq data={data} styles={styles} config={config} />
@@ -293,15 +416,12 @@ export default function Index() {
           </svg> */}
         </div>
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap text-center lg:text-left">
-           
-           
-          </div>
+          <div className="flex flex-wrap text-center lg:text-left"></div>
           {/* <hr className="my-6" /> */}
           <div className="flex flex-wrap items-center md:justify-between justify-center">
             <div className="w-full md:w-4/12 px-4 mx-auto text-center">
               <div className="text-sm text-blueGray-500 font-semibold py-1">
-                Copyright © {new Date().getFullYear()} {" "}
+                Copyright © {new Date().getFullYear()}{" "}
                 <a
                   href="https://www.creative-tim.com?ref=nnjs-footer"
                   className="text-blueGray-500 hover:text-blueGray-800"

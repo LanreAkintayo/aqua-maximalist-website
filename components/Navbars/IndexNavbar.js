@@ -4,11 +4,13 @@ import Link from "next/link";
 
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 
-export default function Navbar(props) {
-  const [navbarOpen, setNavbarOpen] = React.useState(false);
+export default function Navbar({handleNavbar}) {
+ 
+
+  console.log("abcd")
   return (
     <>
-      <nav className="w-full absolute flex flex-wrap items-center justify-between px-2 py-3 bg-transparent">
+      <nav className="w-full flex flex-wrap items-center justify-between px-2 py-3">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <Link href="/">
             <a
@@ -22,9 +24,6 @@ export default function Navbar(props) {
           <div className="flex">
             <button
               className="p-2 rounded-full text-sm sm:text-xl font-medium bg-white sm:px-3 font-hand"
-              onClick={() => {
-                console.log("Mint some clans");
-              }}
             >
               Mint Some Clans
             </button>
@@ -33,19 +32,15 @@ export default function Navbar(props) {
               </button> */}
 
             <button
-              className="text-xl  px-3 py-1 border border-solid border-transparent rounded lg:hidden bg-transparent block"
-              onClick={() => {
-                console.log("clicked");
-                setNavbarOpen(!navbarOpen);
-              }}
+              className="text-xl  pl-3 py-1 border border-solid border-transparent rounded lg:hidden bg-transparent block"
+              onClick={ handleNavbar }
             >
               <i className="text-white fas fa-bars"></i>
             </button>
 
             <div
               className={
-                "lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none" +
-                (navbarOpen ? " block" : " hidden")
+                "lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none hidden" 
               }
               id="example-navbar-warning"
             >
@@ -84,6 +79,8 @@ export default function Navbar(props) {
                 </li>
               </ul>
             </div>
+
+            
           </div>
         </div>
       </nav>
