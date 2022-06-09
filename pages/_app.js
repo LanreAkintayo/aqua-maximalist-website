@@ -5,9 +5,8 @@ import Head from "next/head";
 import Router from "next/router";
 
 import PageChange from "components/PageChange/PageChange.js";
-
+import { ThemeProvider } from "next-themes";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-// import "styles/tailwind.css";
 import "styles/global.css";
 
 // Router.events.on("routeChangeStart", (url) => {
@@ -29,8 +28,9 @@ import "styles/global.css";
 
 function MyApp({ Component, pageProps }) {
   return (
- 
+    <ThemeProvider enableSystem={true} attribute="class">
       <Component {...pageProps} />
+    </ThemeProvider>
   );
 }
 
