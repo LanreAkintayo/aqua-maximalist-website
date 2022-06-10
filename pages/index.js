@@ -131,7 +131,7 @@ export default function Index() {
     } else {
       return (
         <MoonIcon
-          className="w-10 h-10 text-gray-500 "
+          className="w-10 h-10 dark:text-gray-500 text-black "
           role="button"
           onClick={() => {
             setTheme("dark");
@@ -152,7 +152,13 @@ export default function Index() {
     <div className={`bg-white dark:bg-black ${navOpen && "fixed"} `}>
       <section className={`w-full h-screen ${navOpen && "overscroll-none"}`}>
         <div className="relative w-full h-full">
-          <div className="absolute w-full h-full bg-gradient-to-r from-black to-gray-700 ">
+          <div
+            className={`absolute w-full h-full bg-gradient-to-r ${
+              navOpen
+                ? "bg-gradient-to-r dark:from-gray-300 dark:to-gray-400 from-gray-600 to-gray-700 "
+                : " dark:from-black from-gray-300 to-gray-400 dark:to-gray-700"
+            } `}
+          >
             <IndexNavbar
               handleNavbar={handleNavbar}
               handleOn={handleOn}
@@ -167,10 +173,10 @@ export default function Index() {
             />
           </div>
 
-          <div className="sm:px-3  absolute w-full inset-y-32 lg:inset-y-48 text-white  ">
+          <div className="sm:px-3  absolute w-full inset-y-32 lg:inset-y-48 dark:text-white text-black  ">
             <div className="flex flex-col items-center">
               <div className="font-serif text-base text-center sm:text-2xl font-medium px-2">
-                A collection of 3,500 unique clans living on the Ethereum
+                A collection of 10,000 unique clans living on the Ethereum
                 blockchain.
               </div>
               <h1 className="sm:text-7xl text-5xl mt-20 font-bold font-heading">
@@ -179,18 +185,24 @@ export default function Index() {
               <p className="text-base sm:text-xl text-center font-sans font-medium mt-2 px-2 ">
                 Are you a whale, a shark, a dolphin, a crab or a shrimp?
               </p>
-              <button className="p-2 px-3 font-hand text-xl sm:text-3xl text-black border-2 bg-white mt-3 sm:mt-6 font-medium rounded-full">
+              <button className="p-2 px-3 font-hand text-xl sm:text-3xl dark:text-black text-white bg-black dark:bg-white mt-3 sm:mt-6 font-medium rounded-full">
                 View on Opensea
               </button>
             </div>
           </div>
 
           <aside
-            className={`fixed top-0 left-0 ${
+            className={` fixed top-0 left-0 ${
               (!navOpen && "hidden") || (close && "hidden")
             } `}
             aria-label="Sidebar"
           >
+            <div
+              className="cursor-pointer bg-white dark:bg-gray-800 dark:text-white text-black text-right pr-5 pt-3  w-full text-2xl font-medium font-hand"
+              onClick={handleNavbar}
+            >
+              X
+            </div>
             <div className="overflow-y-auto w-72  py-4 h-screen px-3 text-black dark:text-white rounded text-center font-hand bg-white dark:bg-gray-800">
               <ul className="space-y-2 text-2xl">
                 <li className="">
@@ -300,8 +312,11 @@ export default function Index() {
 
             <div className="flex">
               <p className="lg:w-8/12 text-black dark:text-white py-2 text-lg font-hand">
-                When you buy an AQUA clan, you will never be poor again. He sure
-                for me die.
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+                quae ab illo inventore veritatis et quasi architecto beatae
+                vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
+                voluptas sit aspernatur aut odit aut fugit
               </p>
             </div>
           </div>
@@ -414,11 +429,20 @@ export default function Index() {
         </h1>
 
         <p className="font-hand text-xl sm:text-2xl">
-          Look out Look out the siren is blaring <br />
-          She drop me down, I can't stop staring!!
-          <br /> Oh Oh Oh Oh Oh Oh Oh Oh Oh Oh Oh <br /> I'm burning like a
-          fever <br />
-          I'm a believver
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui
+          blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
+          et quas molestias excepturi sint occaecati. <br />
+          <br />
+          cupiditate non provident, similique sunt in culpa qui officia deserunt
+          mollitia animi,
+          <br /> id est laborum et dolorum fuga <br />
+          <br /> Itaque earum rerum hic tenetur a sapiente delectus, ut aut
+          reiciendis voluptatibus maiores alias consequatur aut perferendis
+          doloribus asperiores repella
+          <br /><br />
+          Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+          quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+          voluptas nulla pariatur
         </p>
       </section>
 
@@ -448,8 +472,8 @@ export default function Index() {
             <div className="w-64">
               <img
                 alt="..."
-                src="/img/lanre.jpg"
-                className="object-cover w-full h-full rounded-md"
+                src="/img/lanre3.jpg"
+                className="object-cover w-full rounded-md"
               />
             </div>
 
