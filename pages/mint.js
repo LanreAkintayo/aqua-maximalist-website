@@ -1,12 +1,67 @@
-import IndexNavbar from "components/IndexNavbar.js";
 import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
-import { SunIcon, MoonIcon } from "@heroicons/react/solid";
-import Layout from "components/Layout.js";
-import Marquee from "react-fast-marquee";
 import MintModal from "@components/MintModal";
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
+import { useEagerConnect, useInactiveListener } from "../hooks";
+import Layout from "@components/Layout";
+import { ethers } from "ethers";
+import { injected, walletconnect } from "../connectors";
+
+const connectorsByName = {
+  Injected: injected,
+  WalletConnect: walletconnect,
+};
+
+function getLibrary(provider) {
+  const library = new ethers.providers.Web3Provider(provider);
+  // library.pollingInterval = 12000
+  return library;
+}
 
 export default function Mint() {
+  return (
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <MintClan />
+    </Web3ReactProvider>
+  );
+}
+
+function MintClan() {
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = useWeb3React();
+
+  console.log(`Chain Id: ${chainId}`);
+  console.log(`error: ${error}`);
+  console.log(library);
+  console.log(`Account: ${account}`);
+  console.log(connector);
+
+  // handle logic to recognize the connector currently being activated
+  const [activatingConnector, setActivatingConnector] = useState();
+
+  useEffect(() => {
+    if (activatingConnector && activatingConnector === connector) {
+      setActivatingConnector(undefined);
+    }
+  }, [activatingConnector, connector]);
+
+  // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
+  const triedEager = useEagerConnect();
+
+  // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
+  useInactiveListener(!triedEager || !!activatingConnector);
+
   const [mintModalOpen, setMintModalOpen] = useState(false);
 
   const handleModal = () => {
@@ -46,8 +101,8 @@ export default function Mint() {
               <div className="flex flex-col items-start justify-center h-full">
                 <img
                   alt="..."
-                  src="/img/question_mark_3.jpg"
-                  className="object-cover w-96 h-auto  rounded-md"
+                  src="/img/question_mark_5.jpg"
+                  className="object-cover w-96 h-96  rounded-md"
                 />
               </div>
             </div>
@@ -55,11 +110,29 @@ export default function Mint() {
         </div>
       }
     >
+      <button
+        onClick={() => {
+          setActivatingConnector("injected");
+          activate(connectorsByName["Injected"]);
+        }}
+        className="p-2 bg-yellow-300 text-white"
+      >
+        Metamask
+      </button>
+      <button
+        onClick={() => {
+          setActivatingConnector("walletconnect");
+          activate(connectorsByName["WalletConnect"]);
+        }}
+        className="ml-4 p-2 bg-green-300 text-white"
+      >
+        Wallet Connect
+      </button>
       <div className="lg:hidden flex flex-col items-center">
         <div className="flex flex-col items-start justify-center h-full">
           <img
             alt="..."
-            src="/img/question_mark_3.jpg"
+            src="/img/question_mark_5.jpg"
             className="object-cover w-72 h-auto  rounded-md"
           />
         </div>

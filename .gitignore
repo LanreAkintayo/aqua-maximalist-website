@@ -26,3 +26,13 @@ yarn-error.log*
 out/
 
 commit.sh
+
+secrets.json
+
+next.config.js
+
+config.js
+
+toDo.md
+
+
