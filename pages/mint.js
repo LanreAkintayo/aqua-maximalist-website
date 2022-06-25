@@ -110,6 +110,8 @@ function MintClan() {
         </div>
       }
     >
+
+      <div>Testing: {chainId} {account}</div>
       <button
         onClick={() => {
           setActivatingConnector("injected");
