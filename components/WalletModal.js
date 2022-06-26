@@ -1,12 +1,19 @@
+import { useWeb3React } from "@web3-react/core";
 import ModalLayout from "./ModalLayout";
+import { injected, walletconnect } from "../connectors";
 
 export default function WalletModal({
   handleWalletModal,
  connectWallet,
   disconnectWallet,
   active,
-  currentWallet,
+  
 }) {
+
+ const { connector} = useWeb3React()
+
+ const currentWallet = connector == injected ? "Injected" : "WalletConnect"
+
   return (
     <ModalLayout>
       <div className="p-5 font-hand text-xl dark:bg-black bg-white">
@@ -39,9 +46,9 @@ export default function WalletModal({
 
             <div
               onClick={() => connectWallet("Injected")}
-              className="flex mt-4 py-2 cursor-pointer dark:bg-white dark:text-black rounded-md px-2 items-center justify-between hover:bg-gray-300"
+              className="flex mt-4 py-2 cursor-pointer dark:bg-white bg-gray-200 dark:text-black rounded-md px-2 items-center justify-between dark:hover:bg-gray-300 hover:bg-gray-300"
             >
-              <p>Metamask</p>
+              <p>Metamask </p>
               <img
                 alt="..."
                 src="/img/metamask.png"
@@ -50,7 +57,7 @@ export default function WalletModal({
             </div>
             <div
               onClick={() => connectWallet("WalletConnect")}
-              className="flex mt-4 py-2 cursor-pointer dark:bg-white dark:text-black rounded-md px-2 items-center justify-between hover:bg-gray-300"
+              className="flex mt-4 py-2 cursor-pointer dark:bg-white bg-gray-200 dark:text-black rounded-md px-2 items-center justify-between dark:hover:bg-gray-300 hover:bg-gray-300"
             >
               <p>WalletConnect</p>
               <img
@@ -69,7 +76,7 @@ export default function WalletModal({
                 currentWallet == "Injected"
                   ? "Metamask"
                   : currentWallet
-              }`}</div>
+              }`} </div>
               <button
                 onClick={handleWalletModal}
                 type="button"
@@ -93,9 +100,9 @@ export default function WalletModal({
             {currentWallet === "Injected" && (
               <div
                 onClick={() => disconnectWallet("Injected")}
-                className="flex mt-4 py-2 cursor-pointer dark:bg-white dark:text-black rounded-md px-2 items-center justify-between hover:bg-gray-300"
+                className="flex mt-4 py-2 cursor-pointer dark:bg-white bg-gray-200 dark:text-black rounded-md px-2 items-center justify-between dark:hover:bg-gray-300 hover:bg-gray-300"
               >
-                <p>Metamask</p>
+                <p>Metamask <small><small className="bg-green-400 rounded-md px-1 text-sm">connected</small></small></p>
                 <img
                   alt="..."
                   src="/img/metamask.png"
@@ -107,9 +114,9 @@ export default function WalletModal({
             {currentWallet === "WalletConnect" && (
               <div
                 onClick={() => disconnectWallet("WalletConnect")}
-                className="flex mt-4 py-2 cursor-pointer dark:bg-white dark:text-black rounded-md px-2 items-center justify-between hover:bg-gray-300"
+                className="flex mt-4 py-2 cursor-pointer dark:bg-white bg-gray-200 dark:text-black rounded-md px-2 items-center justify-between dark:hover:bg-gray-300 hover:bg-gray-300"
               >
-                <p>WalletConnect</p>
+                <p>WalletConnect <small><small className="bg-green-400 rounded-md px-1 text-sm">connected</small></small></p>
                 <img
                   alt="..."
                   src="/img/walletConnect.png"

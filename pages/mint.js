@@ -10,6 +10,8 @@ import Layout from "@components/Layout";
 import { ethers } from "ethers";
 import { injected, walletconnect } from "../connectors";
 import WalletModal from "@components/WalletModal";
+import AmountMinted from "@components/AmountMinted";
+import NftInfo from "@components/NftInfo";
 
 const connectorsByName = {
   Injected: injected,
@@ -101,19 +103,16 @@ function MintClan() {
                 </h1>
                 {/* <h1 className="text-7xl  font-bold sm:mt-5 ">NFT Collections</h1> */}
 
-                <p className="mt-5 font-hand lg:text-3xl text-2xl">
-                  300 out of 10,000 minted
-                </p>
+                <AmountMinted contractAddress="0xD2911624e6Cfca77ef61cc3dDdaa44723c344812" />
+
                 <button
                   onClick={() => setMintModalOpen(true)}
-                  className="p-2 px-3 mt-5 text-2xl text-black font-medium rounded-sm bg-white"
+                  className="p-2 px-3 mt-5 text-2xl dark:text-black text-white font-medium rounded-sm dark:bg-white bg-black"
                 >
                   Mint Now
                 </button>
-                <div className="mt-5 font-hand sm:text-2xl text-xl">
-                  <p>Max per wallet is 10</p>
-                  <p>Price per NFT is 0.5 ETH</p>
-                </div>
+                <NftInfo contractAddress="0xD2911624e6Cfca77ef61cc3dDdaa44723c344812"/>
+                
               </div>
             </div>
 
@@ -135,12 +134,12 @@ function MintClan() {
     
       </div>
       
-      <div className="lg:hidden flex flex-col items-center">
+      <div className="lg:hidden flex my-5 flex-col items-center">
         <div className="flex flex-col items-start justify-center h-full">
           <img
             alt="..."
             src="/img/question_mark_5.jpg"
-            className="object-cover w-72 h-auto  rounded-md"
+            className="object-cover w-96 h-96  rounded-md"
           />
         </div>
       </div>
