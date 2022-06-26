@@ -9,6 +9,7 @@ import { useEagerConnect, useInactiveListener } from "../hooks";
 import Layout from "@components/Layout";
 import { ethers } from "ethers";
 import { injected, walletconnect } from "../connectors";
+import WalletModal from "@components/WalletModal";
 
 const connectorsByName = {
   Injected: injected,
@@ -41,22 +42,35 @@ function MintClan() {
     error,
   } = useWeb3React();
 
-  console.log(`Chain Id: ${chainId}`);
-  console.log(`error: ${error}`);
-  console.log(library);
-  console.log(`Account: ${account}`);
-  console.log(connector);
 
   // handle logic to recognize the connector currently being activated
   const [activatingConnector, setActivatingConnector] = useState();
+  const [walletModalOpen, setWalletModalOpen] = useState(false);
+  const [currentWallet, setCurrentWallet] = useState("")
 
-  useEffect(() => {
-    if (activatingConnector && activatingConnector === connector) {
-      setActivatingConnector(undefined);
-    }
-  }, [activatingConnector, connector]);
+  // useEffect(() => {
+  //   console.log("Here we are")
+  //   console.log(currentWallet)
+  // }, [activatingConnector, connector, currentWallet]);
 
   // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
+
+  const connectWallet = (_connector) => {
+
+    console.log(_connector)
+   
+    setActivatingConnector(connectorsByName[_connector])
+    activate(connectorsByName[_connector])
+    setCurrentWallet(_connector)
+
+  }
+  const disconnectWallet = (_connector) => {
+
+    setActivatingConnector(connectorsByName[_connector])
+    deactivate(connectorsByName[_connector])
+    setCurrentWallet("")
+
+  }
   const triedEager = useEagerConnect();
 
   // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
@@ -67,6 +81,12 @@ function MintClan() {
   const handleModal = () => {
     setMintModalOpen(false);
   };
+
+  const handleWalletModal = () => {
+    setWalletModalOpen((prev) => !prev);
+  };
+
+  
 
   return (
     <Layout
@@ -109,27 +129,12 @@ function MintClan() {
           </div>
         </div>
       }
+      handleWalletModal={handleWalletModal}
     >
-
-      <div>Testing: {chainId} {account}</div>
-      <button
-        onClick={() => {
-          setActivatingConnector("injected");
-          activate(connectorsByName["Injected"]);
-        }}
-        className="p-2 bg-yellow-300 text-white"
-      >
-        Metamask
-      </button>
-      <button
-        onClick={() => {
-          setActivatingConnector("walletconnect");
-          activate(connectorsByName["WalletConnect"]);
-        }}
-        className="ml-4 p-2 bg-green-300 text-white"
-      >
-        Wallet Connect
-      </button>
+      <div>
+    
+      </div>
+      
       <div className="lg:hidden flex flex-col items-center">
         <div className="flex flex-col items-start justify-center h-full">
           <img
@@ -262,6 +267,12 @@ function MintClan() {
       {mintModalOpen && (
         <div className="flex justify-center text-center sm:block sm:p-0 mt-2">
           <MintModal mintModalOpen={mintModalOpen} handleModal={handleModal} />
+        </div>
+      )}
+
+      {walletModalOpen && (
+        <div className="flex justify-center text-center sm:block sm:p-0 mt-2">
+          <WalletModal handleWalletModal={handleWalletModal} connectWallet={connectWallet} disconnectWallet={disconnectWallet} active={active} currentWallet={currentWallet}/>
         </div>
       )}
     </Layout>

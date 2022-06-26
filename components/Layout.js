@@ -40,13 +40,19 @@ const config = {
   // tabFocus: true
 };
 
-export default function Layout({ children, pageContent }) {
+export default function Layout({
+  children,
+  pageContent,
+  handleWalletModal = null,
+}) {
   const [navOpen, setNavOpen] = useState(false);
   const [close, setClose] = useState(true);
   const [mounted, setMounted] = useState(false);
   const { systemTheme, theme, setTheme } = useTheme();
   const [faqStyle, setFaqStyle] = useState({});
   const { pathname } = useRouter();
+
+  // console.log(handleWalletModal)
 
   const handleNavbar = () => {
     setNavOpen((prev) => {
@@ -149,7 +155,6 @@ export default function Layout({ children, pageContent }) {
                 : " dark:from-black from-gray-300 to-gray-400 dark:to-gray-700"
             } `}
           >
-            
             <div className="absolute top-0 left-0 w-full h-screen">
               <img
                 alt="..."
@@ -158,10 +163,18 @@ export default function Layout({ children, pageContent }) {
               />
             </div>
             <div className="absolute top-0 left-0 w-full h-screen">
-            <IndexNavbar
-              handleNavbar={handleNavbar}
-              renderThemeChanger={renderThemeChanger}
-            />
+              {handleWalletModal != null ? (
+                <IndexNavbar
+                  handleWalletModal={handleWalletModal}
+                  handleNavbar={handleNavbar}
+                  renderThemeChanger={renderThemeChanger}
+                />
+              ) : (
+                <IndexNavbar
+                  handleNavbar={handleNavbar}
+                  renderThemeChanger={renderThemeChanger}
+                />
+              )}
             </div>
           </div>
 

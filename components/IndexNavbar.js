@@ -1,9 +1,15 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useWeb3React } from "@web3-react/core";
 
-export default function Navbar({ handleNavbar, renderThemeChanger }) {
+export default function Navbar({
+  handleNavbar,
+  renderThemeChanger,
+  handleWalletModal = null,
+}) {
   const router = useRouter();
+  const {account} = useWeb3React()
 
   return (
     <>
@@ -18,7 +24,19 @@ export default function Navbar({ handleNavbar, renderThemeChanger }) {
             </a>
           </Link>
 
-          <div className="flex">
+          <div className="flex items-center">
+            {handleWalletModal != null && (
+              <button
+                onClick={() => {
+                  console.log("I am here");
+                  handleWalletModal();
+                }}
+                className="p-2 font-hand bg-black text-white dark:bg-white dark:text-black rounded-md font-medium mx-2"
+              >
+                {account ? `${account.substr(0, 6)}...${account.substr(account.length - 4)}` : "Connect Wallet"}
+              </button>
+            )}
+
             {renderThemeChanger()}
 
             {router.pathname != "/mint" && (

@@ -15,11 +15,11 @@ import { useRouter } from "next/router";
 export default function Sidebar({ handleNavbar, navOpen, close }) {
   const { pathname } = useRouter();
 
-  console.log(pathname);
-  console.log(`Is nav opened? ${navOpen}`);
-  console.log(close);
+  // console.log(pathname);
+  // console.log(`Is nav opened? ${navOpen}`);
+  // console.log(close);
 
-  console.log("..............................");
+  // console.log("..............................");
 
   return (
     <div>
