@@ -9,26 +9,31 @@ import { abi } from "public/contracts_info/AquaCollection.json";
 const fetcher =
   (library, abi) =>
   (...args) => {
-    let totalMinted;
+    console.log("Inside fetcher")
     if (!library) return;
 
     const [contractAddress, method, account] = args;
 
     const contract = new Contract(contractAddress, abi, library);
 
+
     library.getCode(contractAddress).then((result) => {
       //check whether it is a contract
       if (result === "0x") return;
     });
+   
+   
 
     return contract[method](account);
 
-    // contract
-    //   .balanceOf(account)
-    //   .then((balance) => {
+    contract
+      .balanceOf(account)
+      .then((balance) => {
 
-    //   })
-    //   .catch("error", console.error);
+       console.log(`This is the balance ${balance}`)
+
+      })
+      .catch("error", console.error);
   };
 
 export default function AmountMinted({ contractAddress }) {
@@ -41,7 +46,7 @@ export default function AmountMinted({ contractAddress }) {
     fetcher(library, abi)
   );
 
-  // console.log("This is the data: ", data.toString());
+  console.log("This is the data: ", data);
 
   return (
     <>
