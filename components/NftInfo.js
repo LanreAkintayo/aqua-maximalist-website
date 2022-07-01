@@ -23,7 +23,7 @@ export default function NftInfo({ contractAddress }) {
         .maxPerWallet()
        .then((result) => {
          // debugger
-         console.log("Max per wallet: ", result.toString())
+        //  console.log("Max per wallet: ", result.toString())
           setMaxPerWallet(result);
         })
         .catch("error", console.error);
@@ -32,7 +32,7 @@ export default function NftInfo({ contractAddress }) {
         .cost()
         .then((result) => {
          // debugger
-         console.log("Price per NFT: ", formatEther(result.toString()))
+        //  console.log("Price per NFT: ", formatEther(result.toString()))
           setPrice(result);
         })
         .catch("error", console.error);

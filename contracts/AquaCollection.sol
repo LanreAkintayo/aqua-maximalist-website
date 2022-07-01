@@ -9,11 +9,14 @@ contract AquaCollection is ERC721Enumerable, Ownable {
   using Strings for uint256;
 
   string public baseURI;
+  // uint public totalMinted;
   string public baseExtension = ".json";
   uint256 public cost = 0.00025 ether;
   uint256 public maxSupply = 12;
   uint256 public maxMintAmount = 5;
   uint256 public maxPerWallet = 5;
+ 
+  
   bool public paused = false;
   mapping(address => bool) public whitelisted;
 

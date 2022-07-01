@@ -26,14 +26,14 @@ const fetcher =
 
     return contract[method](account);
 
-    contract
-      .balanceOf(account)
-      .then((balance) => {
+    // contract
+    //   .balanceOf(account)
+    //   .then((balance) => {
 
-       console.log(`This is the balance ${balance}`)
+    //    console.log(`This is the balance ${balance}`)
 
-      })
-      .catch("error", console.error);
+    //   })
+    //   .catch("error", console.error);
   };
 
 export default function AmountMinted({ contractAddress }) {
@@ -46,7 +46,7 @@ export default function AmountMinted({ contractAddress }) {
     fetcher(library, abi)
   );
 
-  console.log("This is the data: ", data);
+  // console.log("This is the data: ", data);
 
   return (
     <>

@@ -2,7 +2,7 @@ const hre = require("hardhat");
 const { BASE_URL } = require("../config");
 
 async function main() {
-  const signers = await ethers.getSigners();
+  const signers = await ethers.getSigners();yarn
 
   console.log(signers[0].address);
   console.log(signers[1].address);

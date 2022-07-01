@@ -17,6 +17,8 @@ module.exports = {
       ...colors,
     },
     extend: {
+      opacity:["disabled"],
+      cursor: ["disabled"],
       flex: {
         2: "2 2 0%",
         3: "3 3 0%",

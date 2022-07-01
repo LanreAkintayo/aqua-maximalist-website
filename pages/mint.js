@@ -12,11 +12,41 @@ import { injected, walletconnect } from "../connectors";
 import WalletModal from "@components/WalletModal";
 import AmountMinted from "@components/AmountMinted";
 import NftInfo from "@components/NftInfo";
+import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
+import { Contract } from "@ethersproject/contracts";
+import { abi } from "public/contracts_info/AquaCollection.json";
+import { formatEther, formatUnits, parseUnits } from "@ethersproject/units";
+import useSWR from "swr";
+import { equivalentMintPrice, todp } from "@utils/helper";
+import { usePromiseTracker, trackPromise } from "react-promise-tracker";
+import MintSuccessModal from "@components/MintSuccessModal";
+
+const OWNER = "0xDD4c43c13e6F1b2374Ed9AAabBA7D56Bb4a68A03";
 
 const connectorsByName = {
   Injected: injected,
   WalletConnect: walletconnect,
 };
+
+const fetchTotalMinted =
+  (library, abi) =>
+  async (...args) => {
+    console.log("Fetching total number of nfts minted");
+    if (!library) return;
+
+    const [contractAddress, method, account] = args;
+
+    const contract = new Contract(contractAddress, abi, library);
+
+    library.getCode(contractAddress).then((result) => {
+      //check whether it is a contract
+      if (result === "0x") return;
+    });
+
+    const totalMinted = await contract.totalSupply();
+
+    return totalMinted.toString();
+  };
 
 function getLibrary(provider) {
   const library = new ethers.providers.Web3Provider(provider);
@@ -44,35 +74,82 @@ function MintClan() {
     error,
   } = useWeb3React();
 
-
   // handle logic to recognize the connector currently being activated
   const [activatingConnector, setActivatingConnector] = useState();
   const [walletModalOpen, setWalletModalOpen] = useState(false);
-  const [currentWallet, setCurrentWallet] = useState("")
+  const [currentWallet, setCurrentWallet] = useState("");
+  const [price, setPrice] = useState("");
+  const [maxPerWallet, setMaxPerWallet] = useState("");
+  const [contract, setContract] = useState(null);
+  const [remainingToMint, setRemainingToMint] = useState();
+  const [maxSupply, setMaxSupply] = useState();
+  const [totalMinted, setTotalMinted] = useState();
+  const contractAddress = "0xD2911624e6Cfca77ef61cc3dDdaa44723c344812";
+  const [success, setSuccess] = useState(false);
+  const [mintReceipt, setMintReceipt] = useState(null);
 
-  // useEffect(() => {
-  //   console.log("Here we are")
-  //   console.log(currentWallet)
-  // }, [activatingConnector, connector, currentWallet]);
+  const { data, mutate } = useSWR(
+    [contractAddress, "totalSupply", account],
+    fetchTotalMinted(library, abi)
+  );
+
+  useEffect(() => {
+    if (!(active && account && library)) return;
+
+    const contract = new Contract(contractAddress, abi, library);
+    if (contract) {
+      setContract(contract);
+    }
+
+    library.getCode(contractAddress).then((result) => {
+      //check whether it is a contract
+      if (result === "0x") return;
+
+      contract
+        .maxPerWallet()
+        .then((result) => {
+          // debugger
+          // console.log("Max per wallet: ", result.toString());
+          setMaxPerWallet(result);
+        })
+        .catch("error", console.error);
+
+      contract
+        .cost()
+        .then((result) => {
+          // debugger
+          // console.log("Price per NFT: ", formatEther(result.toString()));
+          setPrice(result);
+        })
+        .catch("error", console.error);
+
+      contract
+        .maxSupply()
+        .then((result) => {
+          // debugger
+          // console.log("Max Supply: ", result.toString());
+          setMaxSupply(result);
+        })
+        .catch("error", console.error);
+    });
+
+    //called only when changed to active
+  }, [active]);
 
   // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
 
   const connectWallet = (_connector) => {
+    console.log(_connector);
 
-    console.log(_connector)
-   
-    setActivatingConnector(connectorsByName[_connector])
-    activate(connectorsByName[_connector])
-    setCurrentWallet(_connector)
-
-  }
+    setActivatingConnector(connectorsByName[_connector]);
+    activate(connectorsByName[_connector]);
+    setCurrentWallet(_connector);
+  };
   const disconnectWallet = (_connector) => {
-
-    setActivatingConnector(connectorsByName[_connector])
-    deactivate(connectorsByName[_connector])
-    setCurrentWallet("")
-
-  }
+    setActivatingConnector(connectorsByName[_connector]);
+    deactivate(connectorsByName[_connector]);
+    setCurrentWallet("");
+  };
   const triedEager = useEagerConnect();
 
   // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
@@ -82,13 +159,53 @@ function MintClan() {
 
   const handleModal = () => {
     setMintModalOpen(false);
+    setSuccess(false);
+    setMintReceipt(null)
   };
 
   const handleWalletModal = () => {
     setWalletModalOpen((prev) => !prev);
   };
 
-  
+  const mintNow = async (amountToMint) => {
+    console.log("here", amountToMint);
+    if (!(active && account && library)) return;
+    const contract = new Contract(contractAddress, abi, library);
+
+    const signer = contract.provider.getSigner(account);
+    const signerAddress = signer._address;
+
+    console.log(signerAddress);
+
+    library.getCode(contractAddress).then((result) => {
+      //check whether it is a contract
+      if (result === "0x") return;
+      //  mint(address _to, uint256 _mintAmount) public payable
+    });
+
+    const value =
+      signerAddress == OWNER ? 0 : equivalentMintPrice(amountToMint, price);
+    const valueInWei = parseUnits(value.toString(), "ether").toString();
+
+    const mintTx = await trackPromise(
+      contract
+        .connect(signer)
+        .mint(account, amountToMint, { value: valueInWei })
+    );
+
+    const mintReceipt = await trackPromise(mintTx.wait(1));
+
+    setMintReceipt(mintReceipt)
+
+    if (mintReceipt?.transactionHash){
+      setSuccess(true);
+    }
+
+  };
+
+  // console.log("Mint: Price", price);
+  // console.log("Mint: Max per wallet", maxPerWallet);
+  // console.log("The total minted is: ", data)
 
   return (
     <Layout
@@ -111,8 +228,7 @@ function MintClan() {
                 >
                   Mint Now
                 </button>
-                <NftInfo contractAddress="0xD2911624e6Cfca77ef61cc3dDdaa44723c344812"/>
-                
+                <NftInfo contractAddress="0xD2911624e6Cfca77ef61cc3dDdaa44723c344812" />
               </div>
             </div>
 
@@ -130,10 +246,8 @@ function MintClan() {
       }
       handleWalletModal={handleWalletModal}
     >
-      <div>
-    
-      </div>
-      
+      <div></div>
+
       <div className="lg:hidden flex my-5 flex-col items-center">
         <div className="flex flex-col items-start justify-center h-full">
           <img
@@ -263,17 +377,35 @@ function MintClan() {
         </div>
       </div>
 
-      {mintModalOpen && (
+      {!!mintModalOpen && (
         <div className="flex justify-center text-center sm:block sm:p-0 mt-2">
-          <MintModal mintModalOpen={mintModalOpen} handleModal={handleModal} />
+          <MintModal
+            mintModalOpen={mintModalOpen}
+            handleModal={handleModal}
+            mintNow={mintNow}
+            price={price}
+            maxPerWallet={Number(maxPerWallet?.toString())}
+            maxSupply={maxSupply.toString()}
+            totalMinted={data}
+            success={success}
+            account={account}
+            mintReceipt={mintReceipt}
+          />
         </div>
       )}
 
       {walletModalOpen && (
         <div className="flex justify-center text-center sm:block sm:p-0 mt-2">
-          <WalletModal handleWalletModal={handleWalletModal} connectWallet={connectWallet} disconnectWallet={disconnectWallet} active={active} currentWallet={currentWallet}/>
+          <WalletModal
+            handleWalletModal={handleWalletModal}
+            connectWallet={connectWallet}
+            disconnectWallet={disconnectWallet}
+            active={active}
+            currentWallet={currentWallet}
+          />
         </div>
       )}
+
     </Layout>
   );
 }
