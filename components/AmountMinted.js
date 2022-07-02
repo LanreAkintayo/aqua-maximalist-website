@@ -18,7 +18,7 @@ const fetcher =
 
 
 
-  console.log("Check point 1")
+  // console.log("Check point 1")
 
 
 
@@ -29,7 +29,7 @@ const fetcher =
 
    
    
-    console.log("Check point 2")
+    // console.log("Check point 2")
 
     return contract[method](account);
 
@@ -52,7 +52,7 @@ export default function AmountMinted({ contractAddress }) {
 
   
 
-  console.log("Check point 3")
+  // console.log("Check point 3")
 
 
   const { data, mutate } = useSWR(
@@ -61,7 +61,7 @@ export default function AmountMinted({ contractAddress }) {
   );
 
   // console.log("This is the data: ", data);]]
-  console.log("Check point 4")
+  // console.log("Check point 4")
 
   return (
     <>

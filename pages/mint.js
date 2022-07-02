@@ -224,7 +224,7 @@ function MintClan() {
   useEffect(() => {
     if(price && data && maxSupply){
       setFetchModalOpen(false)
-      setMintModalOpen(true)
+      // setMintModalOpen(true)
     }
   }, [price, data, maxSupply])
 
