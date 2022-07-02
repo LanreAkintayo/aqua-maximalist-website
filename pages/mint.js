@@ -20,6 +20,7 @@ import useSWR from "swr";
 import { equivalentMintPrice, todp } from "@utils/helper";
 import { usePromiseTracker, trackPromise } from "react-promise-tracker";
 import MintSuccessModal from "@components/MintSuccessModal";
+import FetchModal from "@components/FetchModal";
 
 const OWNER = "0xDD4c43c13e6F1b2374Ed9AAabBA7D56Bb4a68A03";
 
@@ -77,6 +78,7 @@ function MintClan() {
   // handle logic to recognize the connector currently being activated
   const [activatingConnector, setActivatingConnector] = useState();
   const [walletModalOpen, setWalletModalOpen] = useState(false);
+  const [fetchModalOpen, setFetchModalOpen] = useState(false);
   const [currentWallet, setCurrentWallet] = useState("");
   const [price, setPrice] = useState("");
   const [maxPerWallet, setMaxPerWallet] = useState("");
@@ -85,8 +87,10 @@ function MintClan() {
   const [maxSupply, setMaxSupply] = useState();
   const [totalMinted, setTotalMinted] = useState();
   const contractAddress = "0xD2911624e6Cfca77ef61cc3dDdaa44723c344812";
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(null);
   const [mintReceipt, setMintReceipt] = useState(null);
+  const [mintError, setMintError] = useState(null);
+  const [hidden, setHidden] = useState(true);
 
   const { data, mutate } = useSWR(
     [contractAddress, "totalSupply", account],
@@ -159,16 +163,26 @@ function MintClan() {
 
   const handleModal = () => {
     setMintModalOpen(false);
-    setSuccess(false);
-    setMintReceipt(null)
+    setSuccess(null);
+    setMintReceipt(null);
+    setMintError(null);
+    setFetchModalOpen(false);
   };
 
   const handleWalletModal = () => {
     setWalletModalOpen((prev) => !prev);
   };
 
+  const handleMint = () => {
+    if (!active || !price || !data ) {
+      setFetchModalOpen(true);
+    } else {
+      setMintModalOpen(true);
+    }
+  };
+
   const mintNow = async (amountToMint) => {
-    console.log("here", amountToMint);
+    console.log("I am here");
     if (!(active && account && library)) return;
     const contract = new Contract(contractAddress, abi, library);
 
@@ -187,21 +201,32 @@ function MintClan() {
       signerAddress == OWNER ? 0 : equivalentMintPrice(amountToMint, price);
     const valueInWei = parseUnits(value.toString(), "ether").toString();
 
-    const mintTx = await trackPromise(
-      contract
-        .connect(signer)
-        .mint(account, amountToMint, { value: valueInWei })
-    );
+    try {
+      const mintTx = await trackPromise(
+        contract
+          .connect(signer)
+          .mint(account, amountToMint, { value: valueInWei })
+      );
 
-    const mintReceipt = await trackPromise(mintTx.wait(1));
+      const mintReceipt = await trackPromise(mintTx.wait(1));
 
-    setMintReceipt(mintReceipt)
+      setMintReceipt(mintReceipt);
 
-    if (mintReceipt?.transactionHash){
-      setSuccess(true);
+      if (mintReceipt?.transactionHash) {
+        setSuccess(true);
+      }
+    } catch (error) {
+      setMintError(error);
+      setSuccess(false);
     }
-
   };
+
+  useEffect(() => {
+    if(price && data && maxSupply){
+      setFetchModalOpen(false)
+      setMintModalOpen(true)
+    }
+  }, [price, data, maxSupply])
 
   // console.log("Mint: Price", price);
   // console.log("Mint: Max per wallet", maxPerWallet);
@@ -223,7 +248,7 @@ function MintClan() {
                 <AmountMinted contractAddress="0xD2911624e6Cfca77ef61cc3dDdaa44723c344812" />
 
                 <button
-                  onClick={() => setMintModalOpen(true)}
+                  onClick={handleMint}
                   className="p-2 px-3 mt-5 text-2xl dark:text-black text-white font-medium rounded-sm dark:bg-white bg-black"
                 >
                   Mint Now
@@ -377,8 +402,8 @@ function MintClan() {
         </div>
       </div>
 
-      {!!mintModalOpen && (
-        <div className="flex justify-center text-center sm:block sm:p-0 mt-2">
+      <div className="flex justify-center text-center sm:block sm:p-0 mt-2">
+        {!!mintModalOpen && price && data && maxSupply && (
           <MintModal
             mintModalOpen={mintModalOpen}
             handleModal={handleModal}
@@ -390,12 +415,11 @@ function MintClan() {
             success={success}
             account={account}
             mintReceipt={mintReceipt}
+            mintError={mintError}
           />
-        </div>
-      )}
+        )}
 
-      {walletModalOpen && (
-        <div className="flex justify-center text-center sm:block sm:p-0 mt-2">
+        {walletModalOpen && (
           <WalletModal
             handleWalletModal={handleWalletModal}
             connectWallet={connectWallet}
@@ -403,9 +427,15 @@ function MintClan() {
             active={active}
             currentWallet={currentWallet}
           />
-        </div>
-      )}
+        )}
 
+        {fetchModalOpen && (
+          <FetchModal
+            handleModal={handleModal}
+            active={active}
+          />
+        )}
+      </div>
     </Layout>
   );
 }

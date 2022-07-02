@@ -39,7 +39,7 @@ export default function MintSuccessModal({handleModal, account, mintReceipt}) {
       onClick={() => {
         window.open(`https://testnets.opensea.io/${account}`, '_blank');
       }}
-        className={`p-2 w-full dark:bg-white bg-gray-700 text-center dark:text-black text-white rounded-md font-medium text-2xl disabled:cursor-not-allowed disabled:opacity-50`}
+        className={`p-2 w-full dark:bg-white bg-gray-300 text-center dark:text-black text-black rounded-md font-medium text-2xl disabled:cursor-not-allowed disabled:opacity-50`}
       >
         <LoadingSpinerComponent
           buttonText="View On Opensea"

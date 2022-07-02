@@ -7,6 +7,8 @@ import { abi } from "public/contracts_info/AquaCollection.json";
 import { LoadingSpinerComponent } from "./LoadingSpinnerComponent";
 import { usePromiseTracker, trackPromise } from "react-promise-tracker";
 import MintSuccessModal from "./MintSuccessModal";
+import MintFailModa from "./MintFailModal";
+import MintFailModal from "./MintFailModal";
 
 export default function MintModal({
   handleModal,
@@ -18,6 +20,7 @@ export default function MintModal({
   success,
   account,
   mintReceipt,
+  mintError
 }) {
   const formattedPrice = price ? formatEther(price.toString()) : "0";
   const [counter, setCounter] = useState(1);
@@ -68,13 +71,17 @@ export default function MintModal({
 
   return (
     <ModalLayout>
-      {success ? (
+      {success === true && (
         <MintSuccessModal
           handleModal={handleModal}
           account={account}
           mintReceipt={mintReceipt}
         />
-      ) : (
+      )}
+
+      {success === false && <MintFailModal handleModal={handleModal} mintError={mintError} />}
+
+      {success === null && (
         <div className="p-5 font-hand text-xl dark:bg-black bg-white">
           <div className="flex justify-between items-center rounded-t">
             <button
