@@ -15,8 +15,8 @@ export const injected = new InjectedConnector({
 
 export const walletconnect = new WalletConnectConnector({
   rpc: {
-    1: `https://mainnet.infura.io/v3/${process.env.INFURA_KEY}`,
-    4: `https://rinkeby.infura.io/v3/${process.env.INFURA_KEY}`
+    1: `https://mainnet.infura.io/v3/b0217cf8689941d38c8dd72c9fca96bb`,
+    4: `https://rinkeby.infura.io/v3/b0217cf8689941d38c8dd72c9fca96bb`
   },
   bridge: "https://bridge.walletconnect.org",
   qrcode: true,
