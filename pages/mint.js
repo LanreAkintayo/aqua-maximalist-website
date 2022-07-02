@@ -208,7 +208,10 @@ function MintClan() {
           .mint(account, amountToMint, { value: valueInWei })
       );
 
+      console.log("Mint tX", mintTx)
       const mintReceipt = await trackPromise(mintTx.wait(1));
+
+      console.log("Mint Receipt", mintReceipt)
 
       setMintReceipt(mintReceipt);
 
@@ -216,6 +219,8 @@ function MintClan() {
         setSuccess(true);
       }
     } catch (error) {
+
+      console.log(error)
       setMintError(error);
       setSuccess(false);
     }

@@ -32,7 +32,7 @@ export default function MintFailModal({ handleModal, mintError }) {
       </div>
 
       <div className="mt-5 max-h-80 overflow-auto scrollbar-hide font-sora mb-2 p-2 w-full dark:bg-white bg-gray-300 dark:text-red-800 text-red-800 rounded-md font-medium text-sm`">
-        <small>{mintError?.message} You are the treasure that I seek for many years was right beside me yet I couldn't feel it. When I close my eyes I see you coming to me my girl. I did not know that It was from my thinking to wish my girl. When the breeze of love flow yout o me my girl. I thoug</small>
+        <small>{mintError?.message}</small>
       </div>
     </div>
   );

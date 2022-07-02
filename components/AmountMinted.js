@@ -8,30 +8,29 @@ import { abi } from "public/contracts_info/AquaCollection.json";
 
 const fetcher =
   (library, abi) =>
-  (...args) => {
-    console.log("Inside fetcher")
+  async (...args) => {
+    console.log("Inside fetcher");
     if (!library) return;
 
     const [contractAddress, method, account] = args;
 
     const contract = new Contract(contractAddress, abi, library);
 
-
-
-  // console.log("Check point 1")
-
-
+    // console.log("Check point 1")
 
     library.getCode(contractAddress).then((result) => {
       //check whether it is a contract
       if (result === "0x") return;
     });
 
-   
-   
+    const balance = await contract.balanceOf(account);
+
+    console.log("Balance:", balance);
+    return balance;
+
     // console.log("Check point 2")
 
-    return contract[method](account);
+    // return contract[method](account);
 
     // contract
     //   .balanceOf(account)
@@ -46,14 +45,9 @@ const fetcher =
 export default function AmountMinted({ contractAddress }) {
   const [totalSupply, setTotalSupply] = useState("12");
 
-
-
   const { account, active, library } = useWeb3React();
 
-  
-
   // console.log("Check point 3")
-
 
   const { data, mutate } = useSWR(
     [contractAddress, "balanceOf", account],
