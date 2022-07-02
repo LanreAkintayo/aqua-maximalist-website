@@ -17,12 +17,19 @@ const fetcher =
     const contract = new Contract(contractAddress, abi, library);
 
 
+
+  console.log("Check point 1")
+
+
+
     library.getCode(contractAddress).then((result) => {
       //check whether it is a contract
       if (result === "0x") return;
     });
+
    
    
+    console.log("Check point 2")
 
     return contract[method](account);
 
@@ -39,14 +46,22 @@ const fetcher =
 export default function AmountMinted({ contractAddress }) {
   const [totalSupply, setTotalSupply] = useState("12");
 
+
+
   const { account, active, library } = useWeb3React();
+
+  
+
+  console.log("Check point 3")
+
 
   const { data, mutate } = useSWR(
     [contractAddress, "balanceOf", account],
     fetcher(library, abi)
   );
 
-  // console.log("This is the data: ", data);
+  // console.log("This is the data: ", data);]]
+  console.log("Check point 4")
 
   return (
     <>
